@@ -63,7 +63,7 @@ u:(~crouch) $Brain/Commands/GotoPosture = "Crouch"
 
 u:(~sorry) ["~no_worries $Brain/Mood/Text <> 'sad'" "~forgive $Brain/Set/Mood = 0"]
 
-u:(e:Dialog/NotSpeaking20) Helooo \PAU=400\ Helooo \PAU=400\ anyone there?
+#u:(e:Dialog/NotSpeaking20) Helooo \PAU=400\ Helooo \PAU=400\ anyone there?
 
 u:(a _* is [a an] {type} {kind} {of} _*) $Language/Define/Name = $1 $Language/Define/Parent = $2
 
