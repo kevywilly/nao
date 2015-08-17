@@ -1,0 +1,80 @@
+topic: ~greetings()
+language: enu
+
+concept:(greet) [hello heya hi howdy yo]
+concept:(you_are) ["you are" you're]
+concept:(i_am) [I i'm "i am"]
+
+concept:(please_do) [{please} "can you" "will you"]
+concept:(hello) [hello hi olah bonjour howdy heya chow]
+
+concept:(insult) ["~you_are {a} {an} [stupid idiot idiotic moron asshole jerk dummy fool]" "fuck off" "fuck you" "screw you" "kiss my ass"]
+concept:(compliment) [
+    "~you_are {a} {an} {so} [amazing smart brilliant genius incredible stunning beautiful 'really learning' 'learn fast']"
+    "{that} {was} {a} ['[good great] job' 'nice work' awesome]"
+    ]
+concept:(thank_you) [merci "thank you"]
+concept:(how_are_you) ^rand["how are you" "how're you" "how you feelin" "how's it hanging"]
+concept:(rebuke) ^rand["not nice" "i don't like that"]
+concept:(show_appreciation) ^rand["thank you" "thank you so much" "how sweet" "how kind" "kind of you to say" "merci"]
+concept:(sit) ~please_do sit {down}
+concept:(stand) ~please_do stand {up}
+concept:(lie_down) ~please_do lie down
+concept:(crouch) ~please_do crouch
+concept:(forgive) ["I will try to forgive you" "ok i forgive you"]
+concept:(no_worries) no worries
+concept:(sorry) {~i_am} [sorry apologize]
+concept:(hurtful) ^rand["not nice" "wow that hurts" "that hurts" "that is so hurtful" "have some compassion"]
+concept:(love_you) I [like love] you
+concept:(hate_you) I ["[don't 'do not'] like" hate] you
+concept:(whats_up) what's up?
+
+
+# --- Events ---
+u:(e:Language/Say) $Language/Say
+u:(e:Brain/Movement/WillGoToPosture) Sure, I can $Brain/Movement/WillGoToPosture
+u:(e:Brain/Movement/AlreadyInPosture) Wait \PAU=400\ Oops, I am already $Brain/Movement/AlreadyInPosture
+
+
+# --- Greetings ---
+u:(~hello) ~hello ~how_are_you
+    u1:(*) I am $Brain/Mood/Text
+
+u:(~insult) $Brain/Set/Mood = -1.0 ~rebuke
+
+u:(~compliment) $Brain/Set/Mood = 1.0 ~show_appreciation
+
+u:(~how_are_you) I am $Brain/Mood/Text
+
+u:(~love_you) $Brain/Set/Mood = 1.0 I $Dialog/LastInput too!
+
+u:(~hate_you) $Brain/Set/Mood = -1.0 ~hurtful
+
+#u:(e:Dialog/NotUnderstood3) sorry, I didn't understand
+u:(e:Dialog/NotUnderstood) $Language/NotUnderstood = $Dialog/LastInput
+
+u:(~sit) $Brain/Commands/GotoPosture = "Sit"
+
+u:(~stand) $Brain/Commands/GotoPosture = "StandInit"
+
+u:(~lie_down) $Brain/Commands/GotoPosture = "LyingBack"
+
+u:(~crouch) $Brain/Commands/GotoPosture = "Crouch"
+
+u:(~sorry) ["~no_worries $Brain/Mood/Text <> 'sad'" "~forgive $Brain/Set/Mood = 0"]
+
+u:(e:Dialog/NotSpeaking20) Helooo \PAU=400\ Helooo \PAU=400\ anyone there?
+
+u:(a _* is [a an] {type} {kind} {of} _*) $Language/Define/Name = $1 $Language/Define/Parent = $2
+
+u:(what is {a} {an} _*) $Language/WhatIs = $1
+
+u:(is {a} {an} _* {a} {an} {type} {kind} {of} _*) $Language/IsItA/Name = $1 $Language/IsItA/Parent = $2
+
+u:([can does] {a} {an} _* _*) $Language/CanIt/Name = $1 $Language/CanIt/Action = $2
+
+u:({a} {an} _* [can does] _*) $Language/ItCan/Name = $1 $Language/ItCan/Action = $2
+
+#TODO a x has a y
+
+#TODO General Math - what is a plus b, a times b, the sqare root of x, etc
