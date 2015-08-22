@@ -1,10 +1,6 @@
 __author__ = 'kevywilly'
 
-import sys
-import time
 import os
-
-from naoqi import ALModule, ALProxy
 
 OS_PATH = os.path.dirname(os.path.abspath(__file__))
 
@@ -17,8 +13,8 @@ TOPICS = {'greetings' : TOPICS_PATH + '/greetings_enu.top'}
 #TOPICS = {'greetings' : '/home/nao/topics/greetings_enu.top',
 #          'lexicon' : '/home/nao/.local/share/PackageManager/apps/dialog_lexicon/lexicon_enu.top'}
 
-from database import *
-from naomodule import *
+from scrap.database import *
+from scrap.naomodule import *
 
 class LanguageModule(NaoModule):
 

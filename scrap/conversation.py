@@ -2,12 +2,9 @@ __author__ = 'kevywilly'
 
 __author__ = 'kevywilly'
 
-import sys
-import time
-from naoqi import ALModule, ALBroker, ALProxy
-from optparse import OptionParser
+from naoqi import ALModule, ALProxy
 
-from mood import Mood
+from scrap.mood import Mood
 
 class ConversationModule(ALModule):
     def __init__(self, name):

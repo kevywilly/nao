@@ -30,7 +30,7 @@ class Mood:
         self.text = self.getText(float(v))
 
 
-from naomodule import *
+from scrap.naomodule import *
 
 class MoodModule(NaoModule):
 

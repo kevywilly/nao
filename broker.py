@@ -6,7 +6,10 @@ from optparse import OptionParser
 
 from naoqi import ALBroker
 
-from modules.walk import *
+from modules.nao_face import *
+from modules.nao_motion import *
+from modules.nao_walk import *
+from modules.nao_talk import *
 
 NAO_IP = "nao.local"
 
@@ -39,15 +42,47 @@ def main():
                         pip,         # parent broker IP
                         pport)       # parent broker port
 
-    global NaoWalk
-    NaoWalk = NaoWalkModule("NaoWalk")
+    # Load Face tracking module
 
-    #NaoWalk.demo()
+    global NaoMotion
+    NaoMotion = NaoMotionModule("NaoMotion")
+
+    global NaoFaceTracker
+    NaoFaceTracker = NaoFaceTrackingModule("NaoFaceTracker")
+
+    global NaoWalk
+    NaoWalk = NaoWalkingModule("NaoWalk")
+
+    global NaoTalk
+    NaoTalk = NaoTalkingModule("NaoTalk")
+
+
+
+    NaoMotion.onStart()
+    NaoTalk.onStart()
+    #NaoWalk.onStart()
+    NaoFaceTracker.onStart()
+    #NaoWalk.runDemo()
+
+
+
+
+
+
+
+
+
+
+
     try:
         while True:
             time.sleep(1)
     except KeyboardInterrupt:
         print "Interrupted by user, shutting down"
+        NaoFaceTracker.onStop()
+        NaoTalk.onStop()
+        NaoMotion.onStop()
+        NaoWalk.onStop()
         myBroker.shutdown()
         sys.exit(0)
 

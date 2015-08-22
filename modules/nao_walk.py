@@ -2,7 +2,7 @@ __author__ = 'kevywilly'
 
 import time
 import argparse
-from naoqi import ALProxy, ALModule
+from modules.nao_module import *
 import math
 
 class SPEED:
@@ -20,18 +20,16 @@ class DIR:
     AvoidBackRight = [-0.5, 0.1, -45*math.pi/180]
     AvoidBackLeft = [-0.5, 0.1, 45*math.pi/180]
 
-class NaoWalkModule(ALModule):
+class NaoWalkingModule(NaoModule):
 
     def __init__(self, name):
-        ALModule.__init__(self, name)
-
-        print "initializing ", self.getName()
+        NaoModule.__init__(self, name)
 
         self.motionProxy  = ALProxy("ALMotion")
         self.postureProxy = ALProxy("ALRobotPosture")
         self.tts = ALProxy("ALTextToSpeech")
-        self.memory = ALProxy("ALMemory")
         self.isWalking = False
+        self.demoIsRunning = False
 
     def onStart(self):
         """ start  """
@@ -41,17 +39,25 @@ class NaoWalkModule(ALModule):
         self.postureProxy.goToPosture("StandInit", 0.5)
         self.lookStraight()
 
+        NaoModule.onStart(self)
+
     def onStop(self):
         """ stop """
         self.stopWalk()
         self.lookStraight()
         self.motionProxy.rest()
 
+        NaoModule.onStop(self)
+
     def runDemo(self):
         """ run demo """
-        self.onStart()
+        if self.demoIsRunning is True:
+            return
 
-        self.tts.post.say("My mom always says look left and right before walking")
+        self.motionProxy.wakeUp()
+        self.motionProxy.moveInit()
+        self.demoIsRunning = True
+        self.tts.say("My mom always says look left and right before walking")
 
         self.lookLeft()
         self.lookRight()
@@ -98,6 +104,7 @@ class NaoWalkModule(ALModule):
 
         time.sleep(5)
 
+        self.demoIsRunning = False
         self.onStop()
 
     def walk(self, dir):

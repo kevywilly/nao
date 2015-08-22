@@ -1,8 +1,9 @@
 __author__ = 'kevywilly'
 
-
 from py2neo import Graph, Node, Relationship
-from naomodule import NaoModule
+
+from scrap.naomodule import NaoModule
+
 
 class GraphModule(NaoModule):
 
