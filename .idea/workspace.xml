@@ -2,31 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="25d7aad0-de0a-4515-a4a4-148db522b4a3" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/scrap/__init__.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/scrap/main.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/modules/nao_face.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/modules/nao_module.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/modules/nao_motion.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/modules/nao_talk.py" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/NaoCustomData.db" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/english-words/words.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/english-words/words2.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/modules/interact.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/modules/movement.py" afterPath="" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/NaoCustomData.sqlite" afterPath="$PROJECT_DIR$/scrap/test" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/conversation.py" afterPath="$PROJECT_DIR$/scrap/conversation.py" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/database.py" afterPath="$PROJECT_DIR$/scrap/database.py" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/diagnosis.py" afterPath="$PROJECT_DIR$/scrap/diagnosis.py" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/graph.py" afterPath="$PROJECT_DIR$/scrap/graph.py" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/language.py" afterPath="$PROJECT_DIR$/scrap/language.py" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/modules/walk.py" afterPath="$PROJECT_DIR$/modules/nao_walk.py" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/mood.py" afterPath="$PROJECT_DIR$/scrap/mood.py" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/naomodule.py" afterPath="$PROJECT_DIR$/scrap/naomodule.py" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/prog.py" afterPath="$PROJECT_DIR$/scrap/prog.py" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/tracker.py" afterPath="$PROJECT_DIR$/scrap/tracker.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/english-words" afterPath="$PROJECT_DIR$/english-words" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/broker.py" afterPath="$PROJECT_DIR$/broker.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="Nao.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -671,6 +647,13 @@
       <option name="number" value="Default" />
       <updated>1439308673274</updated>
     </task>
+    <task id="LOCAL-00001" summary="basic nao modules for face detection, walk and talk">
+      <created>1440274988918</created>
+      <option name="number" value="00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1440274988918</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -687,6 +670,7 @@
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24032825" sideWeight="0.36597222" order="10" side_tool="true" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
@@ -735,6 +719,10 @@
   </component>
   <component name="VcsContentAnnotationSettings">
     <option name="myLimit" value="2678400000" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="basic nao modules for face detection, walk and talk" />
+    <option name="LAST_COMMIT_MESSAGE" value="basic nao modules for face detection, walk and talk" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
