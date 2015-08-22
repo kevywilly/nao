@@ -179,63 +179,6 @@ class GraphDB:
         else:
             return False, None
 
-    def relate_word(self, word, interaction, sentiment, concept, grammar):
-        if interaction is None:
-            interaction = "unknown"
-        if sentiment is None:
-            sentiment = "unknown"
-        if concept == None:
-            concept = "unknown"
-        if grammar == None:
-            grammar = "unknown"
-
-        i = Node("Interaction", name=interaction)
-        s = Node("Sentiment", name=sentiment)
-        c = Node("Concept", name=concept)
-        g = Node("Grammar", name=grammar)
-
-        w = Node("Word", name=word)
-        w1 = Relationship(w, "RELATES_TO", i)
-        w2 = Relationship(w, "RELATES_TO", s)
-        w3 = Relationship(w, "RELATES_TO", c)
-        w4 = Relationship(w, "RELATES_TO", g)
-
-        self.graph.create(w1)
-        self.graph.create(w2)
-        self.graph.create(w3)
-        self.graph.create(w4)
-
-    def relate_phrase(self, phrase, interaction, sentiment, concept):
-
-        # clean up the phrase
-        phrase = phrase.lower()
-        phrase = phrase.translate(string.maketrans("",""), string.punctuation)
-
-        if interaction is None:
-            interaction = "unknown"
-        if sentiment is None:
-            sentiment = "unknown"
-        if concept == None:
-            concept = "unknown"
-
-        i = Node("Interaction", name=interaction)
-        p = Node("Phrase", name=phrase)
-        s = Node("Sentiment", name=sentiment)
-        c = Node("Concept", name=concept)
-
-        r1 = Relationship(p, "RELATES_TO", i)
-        r2 = Relationship(p, "RELATES_TO", s)
-        r3 = Relationship(p, "RELATES_TO", c)
-
-        self.graph.create(r1)
-        self.graph.create(r2)
-        self.graph.create(r3)
-
-        words = phrase.split(" ")
-
-        for word in phrase.split(" "):
-            if len(word) > 0:
-                self.relate_word(word, interaction, sentiment, concept, None)
 
 
 

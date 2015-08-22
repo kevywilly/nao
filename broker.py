@@ -1,25 +1,19 @@
 __author__ = 'kevywilly'
 
-
 import sys
 import time
-from naoqi import ALModule, ALBroker, ALProxy
 from optparse import OptionParser
-from brain import *
-from language import *
-from movement import *
 
+from naoqi import ALBroker
 
+from modules.walk import *
 
 NAO_IP = "nao.local"
-
-Brain = None
-Language = None
-Movement = None
 
 def main():
     """Main entry point"""
 
+    print "broker running"
     parser = OptionParser()
     parser.add_option("--pip",
                       help="Parent broker port. The IP address or your robot",
@@ -33,7 +27,7 @@ def main():
         pport=9559)
 
     (opts, args_) = parser.parse_args()
-    pip   = opts.pip
+    pip = opts.pip
     pport = opts.pport
 
     # We need this broker to be able to construct
@@ -45,26 +39,15 @@ def main():
                         pip,         # parent broker IP
                         pport)       # parent broker port
 
-    global Language
-    Language = LanguageModule("Language")
+    global NaoWalk
+    NaoWalk = NaoWalkModule("NaoWalk")
 
-    global Movement
-    Movement = MovementModule("Movement")
-
-    global Brain
-    Brain = BrainModule("Brain")
-    #Brain.onStart()
-
-
-
+    #NaoWalk.demo()
     try:
         while True:
             time.sleep(1)
-            #Brain.setMood(-1.0)
     except KeyboardInterrupt:
-        print
         print "Interrupted by user, shutting down"
-        Brain.onStop()
         myBroker.shutdown()
         sys.exit(0)
 

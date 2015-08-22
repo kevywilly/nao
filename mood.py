@@ -28,3 +28,34 @@ class Mood:
         v = float(value)
         self.value = float(v)
         self.text = self.getText(float(v))
+
+
+from naomodule import *
+
+class MoodModule(NaoModule):
+
+    def __init__(self, name):
+        NaoModule.__init__(self, name)
+
+        self.previous_mood = None
+        self.mood = None
+
+        self.listenTo("Brain/SetMood", "memoryCallback")
+
+    def setMood(self, value):
+        self.previous_mood = self.mood
+        self.mood = Mood(value)
+
+        self.memory.raiseEvent("Brain/MoodText", self.__mood.text)
+        self.memory.raiseEvent("Brain/MoodValue", self.__mood.value)
+
+        pass
+
+
+    #--------------------------------------------------------------------------------
+    # Callbacks
+    #--------------------------------------------------------------------------------
+
+    def memoryCallback(self, key, value, message):
+        if key == "Brain/SetMood":
+            self.setMood(float(value))
