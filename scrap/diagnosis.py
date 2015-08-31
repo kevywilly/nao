@@ -2,10 +2,7 @@
 
 from naoqi import ALProxy
 
-diagnosis = ALProxy("ALDiagnosis", "192.168.1.117", 9559)
+tts = ALProxy("ALTextToSpeech", "127.0.0.1", 56323)
 
-report = diagnosis.getActiveDiagnosis()
+tts.say("hello")
 
-print diagnosis.getActiveDiagnosis()
-
-print diagnosis.getPassiveDiagnosis()

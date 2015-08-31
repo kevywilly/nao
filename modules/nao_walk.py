@@ -51,6 +51,8 @@ class NaoWalkingModule(NaoModule):
 
     def runDemo(self):
         """ run demo """
+        return
+
         if self.demoIsRunning is True:
             return
 

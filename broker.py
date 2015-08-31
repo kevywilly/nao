@@ -10,6 +10,8 @@ from modules.nao_face import *
 from modules.nao_motion import *
 from modules.nao_walk import *
 from modules.nao_talk import *
+from modules.nao_people import *
+from modules.nao_awareness import *
 
 NAO_IP = "nao.local"
 
@@ -50,19 +52,27 @@ def main():
     global NaoFaceTracker
     NaoFaceTracker = NaoFaceTrackingModule("NaoFaceTracker")
 
+    global NaoPeople
+    NaoPeople = NaoPeoplePerceptionModule("NaoPeople")
+
     global NaoWalk
     NaoWalk = NaoWalkingModule("NaoWalk")
 
     global NaoTalk
     NaoTalk = NaoTalkingModule("NaoTalk")
 
+    global NaoAwareness
+    NaoAwareness = NaoAwarenessModule("NaoAwareness")
+
 
 
     NaoMotion.onStart()
     NaoTalk.onStart()
-    #NaoWalk.onStart()
-    NaoFaceTracker.onStart()
+    NaoWalk.onStart()
+    #NaoFaceTracker.onStart()
     #NaoWalk.runDemo()
+    #NaoPeople.onStart()
+    NaoAwareness.onStart()
 
 
 
@@ -79,10 +89,12 @@ def main():
             time.sleep(1)
     except KeyboardInterrupt:
         print "Interrupted by user, shutting down"
-        NaoFaceTracker.onStop()
-        NaoTalk.onStop()
+        #NaoFaceTracker.onStop()
+        #NaoTalk.onStop()
         NaoMotion.onStop()
         NaoWalk.onStop()
+        #NaoPeople.onStop()
+        NaoAwareness.onStart()
         myBroker.shutdown()
         sys.exit(0)
 
