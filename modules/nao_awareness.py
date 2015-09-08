@@ -12,8 +12,8 @@ class NaoAwarenessModule(NaoModule):
     def onStart(self):
         self.awareness.resetAllParameters()
         self.awareness.setStimulusDetectionEnabled("People", True)
-        self.awareness.setStimulusDetectionEnabled("Sound", False)
-        self.awareness.setStimulusDetectionEnabled("Movement", False)
+        self.awareness.setStimulusDetectionEnabled("Sound", True)
+        self.awareness.setStimulusDetectionEnabled("Movement", True)
         self.awareness.setStimulusDetectionEnabled("Touch", True)
         self.awareness.setEngagementMode("FullyEngaged")
 

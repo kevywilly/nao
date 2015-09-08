@@ -12,19 +12,6 @@ class NaoMotionModule(NaoModule):
         self.postureProxy = ALProxy("ALRobotPosture")
         self.defaultSpeed = 0.5
 
-    def onStart(self):
-        """ start  """
-        self.wakeUp()
-        self.standInit()
-
-        NaoModule.onStart(self)
-
-    def onStop(self):
-        """ stop """
-        self.rest()
-
-        NaoModule.onStop(self)
-
     def sit(self, speed = 0.5):
         """ stop """
         self.postureProxy.goToPosture("Sit", speed)

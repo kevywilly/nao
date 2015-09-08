@@ -34,7 +34,7 @@ class NaoWalkingModule(NaoModule):
     def onStart(self):
         """ start  """
         print "starting"
-        self.stopWalk()
+
         self.motionProxy.wakeUp()
         self.postureProxy.goToPosture("StandInit", 0.5)
         self.lookStraight()
@@ -51,7 +51,6 @@ class NaoWalkingModule(NaoModule):
 
     def runDemo(self):
         """ run demo """
-        return
 
         if self.demoIsRunning is True:
             return
