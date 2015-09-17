@@ -8,6 +8,7 @@ class NaoModule(ALModule):
 
         self.memory = ALProxy("ALMemory")
         self.subscriptions = []
+
         print "... initialized " + self.getName()
 
     def loadProxy(self, name):
@@ -42,8 +43,18 @@ class NaoModule(ALModule):
             finally:
                 self.subscriptions = []
 
+    def subscribeAllEvents(self):
+        for key in self.subscriptions:
+            try:
+                self.memory.subscribeToEvent(key, self.getName(), "onCallback")
+            except Exception, e:
+                print "Cound not subscribe to " + key
+                print e
+            finally:
+                self.subscriptions = []
 
     def onStart(self):
+        self.subscribeAllEvents()
         print self.getName() + "... started"
 
     def onStop(self):
@@ -52,6 +63,6 @@ class NaoModule(ALModule):
 
     def onCallback(self, key, value, message):
         """"""
-        #print self.getName() + "got default callback for: " + key
-        #print "... value is: " + value
+        print self.getName() + "got default callback for: %s " % key
+        print "... value is: %s " % value
 

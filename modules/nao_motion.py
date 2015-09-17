@@ -10,27 +10,42 @@ class NaoMotionModule(NaoModule):
         NaoModule.__init__(self, name)
         self.motionProxy  = ALProxy("ALMotion")
         self.postureProxy = ALProxy("ALRobotPosture")
+        self.tts = ALProxy("ALTextToSpeech")
+
         self.defaultSpeed = 0.5
 
-    def sit(self, speed = 0.5):
-        """ stop """
-        self.postureProxy.goToPosture("Sit", speed)
+        self.subscriptions = ["NaoBrain/Motion/GotoPosture"]
+        self.subscriptions = ["NaoBrain/Motion/WakeUp"]
+        self.subscriptions = ["NaoBrain/Motion/Rest"]
 
-    def standInit(self, speed = 0.5):
-        """ stand init """
-        self.postureProxy.goToPosture("StandInit", speed)
+        self.movingToPosture = False
 
-    def crouch(self, speed = 0.5):
-        """ crouch """
-        self.postureProxy.goToPosture("Crouch", speed)
+    def onStart(self):
+        """on stop"""
+        self.motionProxy.wakeUp()
 
-    def sitRelax(self, speed = 0.5):
-        """ sit relaxed """
-        self.postureProxy.goToPosture("SitRelax", speed)
+        NaoModule.onStart(self)
 
-    def lyingBack(self, speed = 0.5):
-        """ lie back """
-        self.postureProxy.goToPosture("LyingBack", speed)
+    def onStop(self):
+        """on stop"""
+        self.motionProxy.rest()
+        NaoModule.onStop(self)
+
+    def goToPosture(self, posture, speed = 0.5):
+        """ go to requested posture if not already there """
+
+        currentPosture = self.postureProxy.getPosture()
+
+        if currentPosture == posture:
+            self.tts.say("Nice try, i don't think so.")
+            return
+        elif self.movingToPosture:
+            self.tts.say("Sorry, i can't do that right now.")
+            return
+
+        self.movingToPosture = True
+        self.gotoPosture(posture, speed)
+        self.movingToPosture = False
 
     def moveInit(self):
         """ prepare for move """
@@ -43,4 +58,14 @@ class NaoMotionModule(NaoModule):
     def rest(self):
         """ stop """
         self.motionProxy.rest()
+
+    def onCallback(self, key, value, message):
+        if key == "NaoBrain/Motion/GotoPosture":
+            self.goToPosture(value)
+        elif key == "NaoBrain/Motion/WakeUp":
+            self.wakeUp()
+        elif key == "NaoBrain/Motion/Rest":
+            self.rest()
+        else:
+            NaoModule.onCallback(self, key, value, message)
 

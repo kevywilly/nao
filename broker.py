@@ -6,7 +6,6 @@ from optparse import OptionParser
 
 from naoqi import ALBroker
 
-from modules.nao_face import *
 from modules.nao_motion import *
 from modules.nao_walk import *
 from modules.nao_talk import *
@@ -50,9 +49,6 @@ def main():
     global NaoMotion
     NaoMotion = NaoMotionModule("NaoMotion")
 
-    global NaoFaceTracker
-    NaoFaceTracker = NaoFaceTrackingModule("NaoFaceTracker")
-
     global NaoPeople
     NaoPeople = NaoPeoplePerceptionModule("NaoPeople")
 
@@ -69,7 +65,7 @@ def main():
     NaoBrain = NaoBrainModule("NaoBrain")
 
 
-    NaoBrain.onStart()
+    #NaoBrain.onStart()
     #NaoPeople.onStart()
     #NaoAwareness.onStart()
 
@@ -88,12 +84,7 @@ def main():
             time.sleep(1)
     except KeyboardInterrupt:
         print "Interrupted by user, shutting down"
-        #NaoFaceTracker.onStop()
-        #NaoTalk.onStop()
-        NaoMotion.onStop()
-        NaoWalk.onStop()
-        #NaoPeople.onStop()
-        NaoAwareness.onStart()
+        NaoBrain.onStop()
         myBroker.shutdown()
         sys.exit(0)
 
